@@ -26,5 +26,12 @@
         android:layout_below="@id/loginscreenbutton"
         android:text="RegisterScreen" />
 
+    <Button
+        android:id="@+id/buttonforgotpassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonregister"
+        android:text="Forgottpassword" />
+
 
 </RelativeLayout>
