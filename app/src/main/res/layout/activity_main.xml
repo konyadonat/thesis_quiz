@@ -33,5 +33,12 @@
         android:layout_below="@id/buttonregister"
         android:text="Forgottpassword" />
 
+    <Button
+        android:id="@+id/buttonmenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonforgotpassword"
+        android:text="Menuscreen" />
+
 
 </RelativeLayout>
