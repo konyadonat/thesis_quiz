@@ -40,5 +40,12 @@
         android:layout_below="@id/buttonforgotpassword"
         android:text="Menuscreen" />
 
+    <Button
+        android:id="@+id/buttonquiz"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonmenu"
+        android:text="Quiz" />
+
 
 </RelativeLayout>
