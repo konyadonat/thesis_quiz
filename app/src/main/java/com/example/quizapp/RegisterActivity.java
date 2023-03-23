@@ -3,7 +3,9 @@ package com.example.quizapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,13 +18,18 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.text.BreakIterator;
+
 public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        mAuth=FirebaseAuth.getInstance();
 
         EditText email = findViewById(R.id.editTextTextEmailAddressregister);
         EditText password = findViewById(R.id.editTextTextPasswordregister);
@@ -35,22 +42,16 @@ public class RegisterActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAuth.createUserWithEmailAndPassword(email.getText().toString(),password.getText().toString()).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             {
-                                if (password.getText().toString() == passwordAgain.getText().toString()){
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    Toast.makeText(RegisterActivity.this, "Sikeres regisztráció!", Toast.LENGTH_SHORT).show();
-                                }
-                                else {
-                                    Toast.makeText(RegisterActivity.this, "A két jelszó nem egyezik!", Toast.LENGTH_SHORT).show();
-                                }
+                                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+                                startActivity(intent);
                             }
 
-                        }
-                        else {
+                        } else {
                             Toast.makeText(RegisterActivity.this, "Sikertelen regisztráció!", Toast.LENGTH_SHORT).show();
 
                         }
@@ -58,7 +59,60 @@ public class RegisterActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+    private void registerUser() {
+        EditText email = findViewById(R.id.editTextTextEmailAddressregister);
+        EditText password = findViewById(R.id.editTextTextPasswordregister);
+        EditText passwordAgain = findViewById(R.id.editTextTextPassword2register);
 
+        if (TextUtils.isEmpty(email.getText().toString())) {
+            Toast.makeText(getApplicationContext(),
+                            "Please enter email!!",
+                            Toast.LENGTH_LONG)
+                    .show();
+            return;
+        }
+        if (TextUtils.isEmpty(password.getText().toString())) {
+            Toast.makeText(getApplicationContext(),
+                            "Please enter password!!",
+                            Toast.LENGTH_LONG)
+                    .show();
+            return;
+        }
+        if ((!TextUtils.equals(password.getText().toString(),passwordAgain.getText().toString()))){
+            Toast.makeText(getApplicationContext(), "A két jelszó nem egyezik", Toast.LENGTH_SHORT).show();
+        }
 
+        // create new user or register new user
+        mAuth
+                .createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(),
+                                            "Registration successful!",
+                                            Toast.LENGTH_LONG)
+                                    .show();
+                            // if the user created intent to login activity
+                            Intent intent
+                                    = new Intent(RegisterActivity.this,
+                                    LoginActivity.class);
+                            startActivity(intent);
+                        } else {
+
+                            // Registration failed
+                            Toast.makeText(
+                                            getApplicationContext(),
+                                            "Registration failed!!"
+                                                    + " Please try again later",
+                                            Toast.LENGTH_LONG)
+                                    .show();
+
+                            // hide the progress bar
+                        }
+                    }
+                });
     }
 }
