@@ -19,18 +19,23 @@ public class User {
 
     private int score;
 
-    public User(String email, String password, int score) {
+    public User(String email, String password) {
         this.email = email;
         this.password = password;
-        this.score = score;
+        this.score = 0;
     }
-
+    public User() {
+        this.score = 0;
+    }
 
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) throws EmailEmptyException, EmailNullException, EmailFormatException {
+        if (email.length() == 0)
+            throw new EmailEmptyException("Az email nem lehet üres!");
+
         if (TextUtils.isEmpty(email)){
             throw new EmailEmptyException("Az email nem lehet üres!");
         }
@@ -65,9 +70,5 @@ public class User {
 
     public int getScore() {
         return score;
-    }
-
-    public void setScore(int score) {
-        this.score = 0;
     }
 }

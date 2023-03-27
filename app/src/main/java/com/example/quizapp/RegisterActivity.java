@@ -6,12 +6,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.quizapp.exceptions.EmailEmptyException;
+import com.example.quizapp.exceptions.EmailFormatException;
+import com.example.quizapp.exceptions.EmailNullException;
+import com.example.quizapp.exceptions.PasswordEmptyException;
+import com.example.quizapp.exceptions.PasswordIsDigitsOnlyException;
+import com.example.quizapp.exceptions.PasswordNotTheSameException;
+import com.example.quizapp.exceptions.PasswordNullException;
+import com.example.quizapp.exceptions.PasswordTooShortException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -22,97 +31,72 @@ import java.text.BreakIterator;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
+    FirebaseAuth mAuth;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        mAuth=FirebaseAuth.getInstance();
-
-        EditText email = findViewById(R.id.editTextTextEmailAddressregister);
-        EditText password = findViewById(R.id.editTextTextPasswordregister);
-        EditText passwordAgain = findViewById(R.id.editTextTextPassword2register);
+        EditText emailet = findViewById(R.id.editTextTextEmailAddressregister);
+        EditText passwordet = findViewById(R.id.editTextTextPasswordregister);
+        EditText passwordAgainet = findViewById(R.id.editTextTextPassword2register);
         Button register = findViewById(R.id.registerbutton);
         ImageView logo = findViewById(R.id.imageView2);
+
+        mAuth = FirebaseAuth.getInstance();
+
         logo.setImageResource(R.drawable.bg);
 
 
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+        register.setOnClickListener(view -> {
+            String email = emailet.getText().toString();
+            String password = passwordet.getText().toString();
+
+            User user = new User();
+            try {
+                user.setEmail(email);
+                user.setPassword(password);
+
+                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            {
-                                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
-                                startActivity(intent);
-                            }
-
+                            Toast.makeText(RegisterActivity.this, "Sikeres regisztráció!", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                         } else {
-                            Toast.makeText(RegisterActivity.this, "Sikertelen regisztráció!", Toast.LENGTH_SHORT).show();
-
+                            Toast.makeText(RegisterActivity.this, "Regisztrációs hiba: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+            } catch (EmailEmptyException e) {
+                emailet.setError(e.getMessage());
+                emailet.requestFocus();
+            } catch (EmailNullException e) {
+                emailet.setError(e.getMessage());
+                emailet.requestFocus();
+            } catch (EmailFormatException e) {
+                emailet.setError(e.getMessage());
+                emailet.requestFocus();
+            } catch (PasswordTooShortException e) {
+                passwordet.setError(e.getMessage());
+                passwordet.requestFocus();
+            } catch (PasswordNullException e) {
+                passwordet.setError(e.getMessage());
+                passwordet.requestFocus();
+            } catch (PasswordIsDigitsOnlyException e) {
+                passwordet.setError(e.getMessage());
+                passwordet.requestFocus();
+            } catch (PasswordEmptyException e) {
+                passwordet.setError(e.getMessage());
+                passwordet.requestFocus();
             }
-        });
-    }
-    private void registerUser() {
-        EditText email = findViewById(R.id.editTextTextEmailAddressregister);
-        EditText password = findViewById(R.id.editTextTextPasswordregister);
-        EditText passwordAgain = findViewById(R.id.editTextTextPassword2register);
+            catch (Exception e) {
+                Toast.makeText(this, "Hiba! " +e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
 
-        if (TextUtils.isEmpty(email.getText().toString())) {
-            Toast.makeText(getApplicationContext(),
-                            "Please enter email!!",
-                            Toast.LENGTH_LONG)
-                    .show();
-            return;
-        }
-        if (TextUtils.isEmpty(password.getText().toString())) {
-            Toast.makeText(getApplicationContext(),
-                            "Please enter password!!",
-                            Toast.LENGTH_LONG)
-                    .show();
-            return;
-        }
-        if ((!TextUtils.equals(password.getText().toString(),passwordAgain.getText().toString()))){
-            Toast.makeText(getApplicationContext(), "A két jelszó nem egyezik", Toast.LENGTH_SHORT).show();
-        }
-
-        // create new user or register new user
-        mAuth
-                .createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(),
-                                            "Registration successful!",
-                                            Toast.LENGTH_LONG)
-                                    .show();
-                            // if the user created intent to login activity
-                            Intent intent
-                                    = new Intent(RegisterActivity.this,
-                                    LoginActivity.class);
-                            startActivity(intent);
-                        } else {
-
-                            // Registration failed
-                            Toast.makeText(
-                                            getApplicationContext(),
-                                            "Registration failed!!"
-                                                    + " Please try again later",
-                                            Toast.LENGTH_LONG)
-                                    .show();
-
-                            // hide the progress bar
-                        }
-                    }
-                });
-    }
+    });
+}
 }

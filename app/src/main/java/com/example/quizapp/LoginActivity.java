@@ -40,7 +40,9 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAuth.signInWithEmailAndPassword(email.getText().toString(),password.getText().toString()).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+
+                User user = new User(email.getText().toString(),password.getText().toString());
+                mAuth.signInWithEmailAndPassword(user.getEmail(), user.getPassword()).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
@@ -54,19 +56,6 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         });
-
-        /*mAuth.signInWithEmailAndPassword(email.getText().toString(),password.getText().toString())
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
-                            FirebaseUser user = mAuth.getCurrentUser();
-                        }
-                        else{
-                            Toast.makeText(LoginActivity.this, "Helytelen felhasználói adatok!", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });*/
     }
 
     @Override
