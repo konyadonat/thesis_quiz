@@ -60,10 +60,13 @@ public class RegisterActivity extends AppCompatActivity {
                 user.setEmail(email);
                 user.setPassword(password);
 
+                if(!passwordAgainet.getText().toString().equals(email)) {
+                    throw new PasswordNotTheSameException("A két jelszó nem egyezik!");
+                }
                 mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
+                        if(task.isSuccessful()) {
                             Toast.makeText(RegisterActivity.this, "Sikeres regisztráció!", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                         } else {
@@ -91,6 +94,12 @@ public class RegisterActivity extends AppCompatActivity {
                 passwordet.requestFocus();
             } catch (PasswordEmptyException e) {
                 passwordet.setError(e.getMessage());
+                passwordet.requestFocus();
+            }
+            catch (PasswordNotTheSameException e) {
+                passwordet.setError(e.getMessage());
+                passwordet.setText("");
+                passwordAgainet.setText("");
                 passwordet.requestFocus();
             }
             catch (Exception e) {
