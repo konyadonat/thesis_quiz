@@ -11,6 +11,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.quizapp.exceptions.EmailEmptyException;
+import com.example.quizapp.exceptions.EmailFormatException;
+import com.example.quizapp.exceptions.EmailNullException;
+import com.example.quizapp.exceptions.PasswordEmptyException;
+import com.example.quizapp.exceptions.PasswordIsDigitsOnlyException;
+import com.example.quizapp.exceptions.PasswordNullException;
+import com.example.quizapp.exceptions.PasswordTooShortException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -26,8 +33,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        EditText email = findViewById(R.id.editTextTextEmailAddress);
-        EditText password = findViewById(R.id.editTextTextPassword);
+        EditText emailet = findViewById(R.id.editTextTextEmailAddress);
+        EditText passwordet = findViewById(R.id.editTextTextPassword);
         Button login = findViewById(R.id.button);
 
 
@@ -40,30 +47,70 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String email = emailet.getText().toString();
+                String password = passwordet.getText().toString();
 
-                User user = new User(email.getText().toString(),password.getText().toString());
-                mAuth.signInWithEmailAndPassword(user.getEmail(), user.getPassword()).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(LoginActivity.this, "Sikeres belépés!", Toast.LENGTH_SHORT).show();
-                        }
-                        else{
-                            Toast.makeText(LoginActivity.this, "Helytelen felhasználói adatok!", Toast.LENGTH_SHORT).show();
-                        }
+                User user = new User();
+
+                try {
+                    user.setEmail(email);
+
+                    if (password == null) {
+                        throw new PasswordNullException("Írd be a jelszavad!");
                     }
-                });
+
+                    if (password == "") {
+                        throw new PasswordEmptyException("Írd be a jelszavad!");
+                    }
+                    mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                                Toast.makeText(LoginActivity.this, "Sikeres bejelentkezés!", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(LoginActivity.this,MenuActivity.class);
+                                startActivity(intent);
+                                finish();
+
+                            }
+                            else {
+                                Toast.makeText(LoginActivity.this, "Helytelen felhasználói adatok!", Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+                    });
+
+                } catch (EmailEmptyException e) {
+                    emailet.setError(e.getMessage());
+                    emailet.requestFocus();
+                } catch (EmailNullException e) {
+                    emailet.setError(e.getMessage());
+                    emailet.requestFocus();
+                } catch (EmailFormatException e) {
+                    emailet.setError(e.getMessage());
+                    emailet.requestFocus();
+                } catch (PasswordNullException e) {
+                    passwordet.setError(e.getMessage());
+                    passwordet.requestFocus();
+                } catch (PasswordEmptyException e) {
+                    passwordet.setError(e.getMessage());
+                    passwordet.requestFocus();
+                }
+                catch (IllegalArgumentException e) {
+                    passwordet.setError("Írd be a jelszavad!");
+                    passwordet.requestFocus();
+                }
             }
         });
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null){
+        FirebaseUser currentuser = mAuth.getCurrentUser();
+        if (currentuser != null){
             Intent intent = new Intent(LoginActivity.this,MenuActivity.class);
             startActivity(intent);
             finish();
