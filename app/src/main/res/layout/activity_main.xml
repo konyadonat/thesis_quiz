@@ -47,5 +47,12 @@
         android:layout_below="@id/buttonmenu"
         android:text="Quiz" />
 
+    <Button
+        android:id="@+id/buttonprofile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonquiz"
+        android:text="Profile" />
+
 
 </RelativeLayout>

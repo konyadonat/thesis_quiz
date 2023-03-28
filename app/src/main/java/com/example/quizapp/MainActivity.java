@@ -69,5 +69,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button profile = findViewById(R.id.buttonprofile);
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

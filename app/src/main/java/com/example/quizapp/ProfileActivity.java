@@ -6,29 +6,31 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
-public class MenuActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        setContentView(R.layout.activity_profile);
 
         mAuth = FirebaseAuth.getInstance();
-        TextView icon = (TextView) findViewById(R.id.usericon);
 
-        icon.setOnClickListener(new View.OnClickListener() {
+        Button logout = findViewById(R.id.profilelogutbutton);
+
+        logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this,ProfileActivity.class);
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(ProfileActivity.this,LoginActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
+
 
     }
 }
