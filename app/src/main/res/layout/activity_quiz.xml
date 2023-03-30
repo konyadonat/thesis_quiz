@@ -96,29 +96,31 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/question">
 
-       <com.google.android.material.button.MaterialButton
+       <androidx.appcompat.widget.AppCompatButton
            android:id="@+id/option1"
            android:layout_width="match_parent"
            android:layout_height="match_parent"
            android:layout_weight="0.5"
+           android:background="@drawable/round_back_white_stroke"
            android:text="Első szó"
            android:textStyle="bold"
            android:padding="16dp"
            android:layout_margin="20dp">
 
-       </com.google.android.material.button.MaterialButton>
+       </androidx.appcompat.widget.AppCompatButton>
 
-        <com.google.android.material.button.MaterialButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/option2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:text="Második szó"
+            android:background="@drawable/round_back_white_stroke"
             android:textStyle="bold"
             android:padding="16dp"
             android:layout_margin="20dp">
 
-        </com.google.android.material.button.MaterialButton>
+        </androidx.appcompat.widget.AppCompatButton>
 
     </LinearLayout>
 
@@ -128,40 +130,42 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/elsoketgomblinear">
 
-        <com.google.android.material.button.MaterialButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/option3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Harmadik szó"
+            android:background="@drawable/round_back_white_stroke"
             android:textStyle="bold"
             android:layout_weight="0.5"
             android:padding="16dp"
             android:layout_margin="20dp">
 
-        </com.google.android.material.button.MaterialButton>
+        </androidx.appcompat.widget.AppCompatButton>
 
-        <com.google.android.material.button.MaterialButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/option4"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/round_back_white_stroke"
             android:text="Korrekt szó"
             android:textStyle="bold"
             android:layout_weight="0.5"
             android:padding="16dp"
             android:layout_margin="20dp">
 
-        </com.google.android.material.button.MaterialButton>
+        </androidx.appcompat.widget.AppCompatButton>
 
     </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/submitbutton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/masodikketgomblinear"
-        android:layout_centerHorizontal="true"
+        android:layout_margin="16dp"
         android:text="Küldés!">
-    </androidx.appcompat.widget.AppCompatButton>
+    </com.google.android.material.button.MaterialButton>
 
     <LinearLayout
         android:id="@+id/resultsav"
