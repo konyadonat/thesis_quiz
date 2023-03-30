@@ -22,20 +22,37 @@
             android:ellipsize="end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/szia_user"
+            android:text="User"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@color/white"
-            android:layout_weight="0.8"/>
+            android:layout_marginLeft="20dp"
+            android:layout_weight="2"/>
+
+
+        <TextView
+            android:id="@+id/topictv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:text="Topic"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:gravity="center"
+            android:layout_marginRight="40dp"
+
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="123"
-            android:textSize="20sp"
             android:textColor="@color/white"
-            android:textStyle="bold">
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginRight="10dp">
         </TextView>
 
         <TextView
@@ -58,26 +75,29 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/angolszotextview"
+        android:id="@+id/question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/usersav"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="40dp"
+        android:gravity="center"
         android:padding="16dp"
-        android:layout_margin="40dp"
         android:text="Angol szó"
         android:textColor="@color/white"
-        android:gravity="center"
-        android:textStyle="bold"
         android:textSize="40dp"
-        android:layout_below="@id/usersav">
-    </TextView>
+        android:textStyle="bold"></TextView>
 
     <LinearLayout
         android:id="@+id/elsoketgomblinear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/angolszotextview">
+        android:layout_below="@id/question">
 
        <com.google.android.material.button.MaterialButton
+           android:id="@+id/option1"
            android:layout_width="match_parent"
            android:layout_height="match_parent"
            android:layout_weight="0.5"
@@ -89,6 +109,7 @@
        </com.google.android.material.button.MaterialButton>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/option2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
@@ -108,6 +129,7 @@
         android:layout_below="@id/elsoketgomblinear">
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/option3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Harmadik szó"
@@ -119,6 +141,7 @@
         </com.google.android.material.button.MaterialButton>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/option4"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Korrekt szó"
@@ -154,18 +177,20 @@
             android:ellipsize="end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:padding="20dp"
-            android:text="1/6"
+            android:text="1/20"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:layout_weight="0.8"/>
 
         <TextView
+            android:id="@+id/timer"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="1:00"
+            android:text="3:30"
             android:textSize="20sp"
             android:textColor="@color/white"
             android:textStyle="bold">
@@ -177,7 +202,8 @@
             android:layout_height="36dp"
             android:layout_gravity="center"
             android:textSize="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="10dp"
             android:layout_weight="0"
             android:background="@drawable/baseline_timer_24" />
 

@@ -7,4 +7,14 @@
     android:background="@drawable/background"
     tools:context=".ResultsActivity">
 
+
+    <TextView
+        android:id="@+id/correctanswersresult"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="asd"
+        android:textSize="70dp"
+        android:textStyle="bold"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
