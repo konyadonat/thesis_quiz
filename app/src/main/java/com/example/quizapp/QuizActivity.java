@@ -1,7 +1,9 @@
 package com.example.quizapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,6 +11,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +40,7 @@ public class QuizActivity extends AppCompatActivity {
 
     private  int seconds = 0;
 
-    private  List<QuestionList> questionLists;
+    private  List<QuestionList> questionLists = new ArrayList<>();
 
     private int currentQuestionPosition = 0;
 
@@ -48,6 +56,8 @@ public class QuizActivity extends AppCompatActivity {
         questions = findViewById(R.id.progresstextview);
         String getTopic = getIntent().getStringExtra("topic");
 
+
+
         option1 = findViewById(R.id.option1);
         option2 = findViewById(R.id.option2);
         option3 = findViewById(R.id.option3);
@@ -55,17 +65,51 @@ public class QuizActivity extends AppCompatActivity {
 
         submit = findViewById(R.id.submitbutton);
 
+        ProgressDialog progressDialog = new ProgressDialog(QuizActivity.this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Betöltés....");
+        progressDialog.show();
         //TODO PUT GETTOPIC INTO THIS ONCE IT IS IMPLEMENTED
-        questionLists = QuestionsBank.getQuestions("konyha");
+        //questionLists = QuestionsBank.getQuestions("konyha");
+        //TODO FIREBASE HERE
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://steng-dab96-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
+
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //TODO insert getTopic value here
+                for (DataSnapshot dataSnapshot: snapshot.child("konyha").getChildren()){
+                    String getQuestion = dataSnapshot.child("question").getValue(String.class);
+                    String getOption1 = dataSnapshot.child("option1").getValue(String.class);
+                    String getOption2 = dataSnapshot.child("option2").getValue(String.class);
+                    String getOption3 = dataSnapshot.child("option3").getValue(String.class);
+                    String getOption4 = dataSnapshot.child("option4").getValue(String.class);
+                    String getAnswer = dataSnapshot.child("answer").getValue(String.class);
+
+                    QuestionList questionList = new QuestionList(getQuestion, getOption1, getOption2, getOption3, getOption4, getAnswer);
+                    questionLists.add(questionList);
+                }
+
+                progressDialog.hide();
+
+                questions.setText((currentQuestionPosition+1)+"/"+questionLists.size());
+                question.setText(questionLists.get(0).getQuestion());
+                option1.setText(questionLists.get(0).getOption1());
+                option2.setText(questionLists.get(0).getOption2());
+                option3.setText(questionLists.get(0).getOption3());
+                option4.setText(questionLists.get(0).getOption4());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         startTimer(timer);
 
 
-        questions.setText((currentQuestionPosition+1)+"/"+questionLists.size());
-        question.setText(questionLists.get(0).getQuestion());
-        option1.setText(questionLists.get(0).getOption1());
-        option2.setText(questionLists.get(0).getOption2());
-        option3.setText(questionLists.get(0).getOption3());
-        option4.setText(questionLists.get(0).getOption4());
         option1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
