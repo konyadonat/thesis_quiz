@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -223,7 +224,9 @@ public class QuizActivity extends AppCompatActivity {
         }
     }
 
-    private void startTimer(TextView timertv) {
+    //TODO FIX TIMER IF IT IS 0 THEN CANCEL CURRENT QUIZ
+    private void startTimer(TextView timertv)
+    {
         quizTimer = new Timer();
 
         quizTimer.scheduleAtFixedRate(new TimerTask() {
@@ -237,8 +240,7 @@ public class QuizActivity extends AppCompatActivity {
                     quizTimer.purge();
                     quizTimer.cancel();
 
-                    Toast.makeText(QuizActivity.this, "Lejárt az idő!", Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(QuizActivity.this, "Letelt az idő!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(QuizActivity.this,ResultsActivity.class);
                     intent.putExtra("correct", getCorrectAnsw());
                     startActivity(intent);
@@ -269,6 +271,8 @@ public class QuizActivity extends AppCompatActivity {
         },1000,1000);
 
     }
+
+
     private int getCorrectAnsw() {
         int correctAnswers = 0;
 
