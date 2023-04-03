@@ -48,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        logo.setImageResource(R.drawable.bg);
+        logo.setImageResource(R.drawable.stenglogo);
 
 
         register.setOnClickListener(view -> {

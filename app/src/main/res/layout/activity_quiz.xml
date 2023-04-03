@@ -163,9 +163,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/masodikketgomblinear"
-        android:layout_margin="16dp"
-        android:text="Küldés!">
-    </com.google.android.material.button.MaterialButton>
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Küldés!"></com.google.android.material.button.MaterialButton>
 
     <LinearLayout
         android:id="@+id/resultsav"

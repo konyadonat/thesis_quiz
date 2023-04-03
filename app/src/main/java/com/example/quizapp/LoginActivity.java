@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         ImageView logo = findViewById(R.id.imageView2);
-        logo.setImageResource(R.drawable.bg);
+        logo.setImageResource(R.drawable.stenglogo);
 
 
         login.setOnClickListener(new View.OnClickListener() {
