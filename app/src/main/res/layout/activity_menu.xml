@@ -15,16 +15,16 @@
         android:background="#30ffffff">
 
         <TextView
-            android:paddingStart="10dp"
             android:id="@+id/usersavtext"
-            android:ellipsize="end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/szia_user"
-            android:textSize="24sp"
-            android:textStyle="bold"
+            android:layout_weight="0.8"
+            android:ellipsize="end"
+            android:paddingStart="10dp"
+            android:text="Email"
             android:textColor="@color/white"
-            android:layout_weight="0.8"/>
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -79,6 +79,7 @@
         android:orientation="vertical">
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/konyhabutton"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_margin="16dp"
@@ -88,6 +89,7 @@
             android:textStyle="bold" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/etterembutton"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_margin="16dp"
@@ -97,6 +99,7 @@
             android:textStyle="bold" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/edzoterembutton"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_margin="16dp"
@@ -106,6 +109,7 @@
             android:textStyle="bold" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/karacsonybutton"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_margin="16dp"

@@ -69,9 +69,6 @@ public class QuizActivity extends AppCompatActivity {
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Betöltés....");
         progressDialog.show();
-        //TODO PUT GETTOPIC INTO THIS ONCE IT IS IMPLEMENTED
-        //questionLists = QuestionsBank.getQuestions("konyha");
-        //TODO FIREBASE HERE
         DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://steng-dab96-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
 
 
@@ -134,7 +131,6 @@ public class QuizActivity extends AppCompatActivity {
                     option2.setBackgroundResource(R.drawable.round_back_red);
                     option2.setTextColor(Color.WHITE);
 
-                    Toast.makeText(QuizActivity.this, "OPTION2 "+ option1.getText() , Toast.LENGTH_SHORT).show();
                     revealAnsw();
 
                     questionLists.get(currentQuestionPosition).setUserSelectedAnswer(selectedOption);
@@ -150,7 +146,6 @@ public class QuizActivity extends AppCompatActivity {
 
                     option3.setBackgroundResource(R.drawable.round_back_red);
                     option3.setTextColor(Color.WHITE);
-                    Toast.makeText(QuizActivity.this, "OPTION3 "+ option1.getText() , Toast.LENGTH_SHORT).show();
 
                     revealAnsw();
 
@@ -167,7 +162,6 @@ public class QuizActivity extends AppCompatActivity {
 
                     option4.setBackgroundResource(R.drawable.round_back_red);
                     option4.setTextColor(Color.WHITE);
-                    Toast.makeText(QuizActivity.this, "OPTION4 "+ option1.getText() , Toast.LENGTH_SHORT).show();
 
                     revealAnsw();
 
