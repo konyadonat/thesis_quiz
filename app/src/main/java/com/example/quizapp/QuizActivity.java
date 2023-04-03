@@ -118,7 +118,6 @@ public class QuizActivity extends AppCompatActivity {
 
                  option1.setBackgroundResource(R.drawable.round_back_red);
                  option1.setTextColor(Color.WHITE);
-                 Toast.makeText(QuizActivity.this, "OPTION1 "+ option1.getText() , Toast.LENGTH_SHORT).show();
                  revealAnsw();
 
                  questionLists.get(currentQuestionPosition).setUserSelectedAnswer(selectedOption);
