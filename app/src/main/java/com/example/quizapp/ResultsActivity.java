@@ -18,7 +18,7 @@ public class ResultsActivity extends AppCompatActivity {
 
         result = findViewById(R.id.correctanswersresult);
         int correct = getIntent().getIntExtra("correct",0);
-        result.setText("Korrekt válasz: " + correct);
+        result.setText("Jó válasz: " + correct+ " !");
 
 
     }

@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/resultsrelative"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
@@ -21,7 +22,6 @@
         android:gravity="center">
 
         <TextView
-            android:id="@+id/correctanswersresult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -37,11 +37,16 @@
         android:id="@+id/linearresult2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/linearresult">
+        android:layout_below="@id/linearresult"
+        android:layout_margin="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:background="@drawable/bg">
+            android:background="@drawable/congrats">
 
         </ImageView>
     </LinearLayout>
@@ -50,14 +55,40 @@
             android:id="@+id/linearresult3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/linearresult">
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </androidx.appcompat.widget.AppCompatButton>
+            android:layout_below="@id/linearresult2"
+            android:layout_margin="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/correctanswersresult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Jó válasz: !"
+                android:textSize="30sp"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
     </LinearLayout>
 
-
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linearresult3"
+        android:layout_margin="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/round_back_green"
+        android:text="Kész!" />
 
 
 
