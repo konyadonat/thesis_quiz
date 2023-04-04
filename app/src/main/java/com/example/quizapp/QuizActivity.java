@@ -214,6 +214,7 @@ public class QuizActivity extends AppCompatActivity {
 
         else{
             Intent intent = new Intent(QuizActivity.this,ResultsActivity.class);
+            intent.putExtra("total",questionLists.size());
             intent.putExtra("correct",getCorrectAnsw());
             startActivity(intent);
 
