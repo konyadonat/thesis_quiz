@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionsBank {
-    //TODO MORE TOPICS
 
     private static List<QuestionList>  konyha() {
         List<QuestionList> questionLists = new ArrayList<>();
@@ -18,7 +17,6 @@ public class QuestionsBank {
 
 
     public static List<QuestionList> getQuestions(String topic) {
-        //TODO MORE TOPICS
         switch (topic) {
             case "konyha":
                 return konyha();

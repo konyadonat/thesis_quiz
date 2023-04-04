@@ -19,7 +19,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        //TODO VALIDATION
+        //TODO VALIDATION IF USER CHANGES DATA
         Button logout = findViewById(R.id.profilelogutbutton);
 
         logout.setOnClickListener(new View.OnClickListener() {

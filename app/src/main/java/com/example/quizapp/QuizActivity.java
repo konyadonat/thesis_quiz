@@ -26,8 +26,6 @@ import java.util.TimerTask;
 
 public class QuizActivity extends AppCompatActivity {
 
-    //TODO CHANGE EVERY BUTTON TO EACH LINEARLAYOUT
-
     private TextView questions;
     private TextView question;
 
@@ -76,8 +74,7 @@ public class QuizActivity extends AppCompatActivity {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //TODO insert getTopic value here
-                for (DataSnapshot dataSnapshot: snapshot.child("konyha").getChildren()){
+                for (DataSnapshot dataSnapshot: snapshot.child(getTopic).getChildren()){
                     String getQuestion = dataSnapshot.child("question").getValue(String.class);
                     String getOption1 = dataSnapshot.child("option1").getValue(String.class);
                     String getOption2 = dataSnapshot.child("option2").getValue(String.class);
