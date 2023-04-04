@@ -62,6 +62,8 @@ public class RegisterActivity extends AppCompatActivity {
             try {
                 user.setEmail(email);
                 user.setPassword(password);
+                int index = email.indexOf('@');
+                String username = email.substring(0,index);
 
                 if(passwordAgainet.getText().toString().equals(password)) {
                     mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -69,9 +71,10 @@ public class RegisterActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()) {
 
+
                                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
 
-                                userReference.push().setValue(user);
+                                userReference.child(username).setValue(user);
                                 Toast.makeText(RegisterActivity.this, "Sikeres regisztráció!", Toast.LENGTH_SHORT).show();
                                 finish();
                             } else {
