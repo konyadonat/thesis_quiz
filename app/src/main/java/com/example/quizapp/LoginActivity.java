@@ -26,7 +26,9 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
-    protected static FirebaseAuth mAuth;
+    static FirebaseAuth mAuth;
+
+    static FirebaseUser currentuser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        FirebaseUser currentuser = mAuth.getCurrentUser();
+        currentuser = mAuth.getCurrentUser();
         if (currentuser != null){
             Intent intent = new Intent(LoginActivity.this,MenuActivity.class);
             startActivity(intent);

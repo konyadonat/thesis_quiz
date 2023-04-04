@@ -28,6 +28,10 @@ public class User {
     }
     private int score;
 
+    public User(String email) {
+        this.email = email;
+    }
+
     public User(String email, String password) {
         this.email = email;
         this.password = password;
@@ -55,6 +59,10 @@ public class User {
             throw new EmailFormatException("Az email formátuma nem megfelelő!");
         }
         this.email = email;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public String getPassword() {
