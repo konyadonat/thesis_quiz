@@ -7,12 +7,14 @@
     tools:context=".MenuActivity"
     android:background="@drawable/background">
 
+
     <LinearLayout
         android:id="@+id/usersav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="#30ffffff">
+
 
         <TextView
             android:id="@+id/usersavtext"
@@ -24,12 +26,10 @@
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold" />
-
         <TextView
             android:id="@+id/score"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="123"
             android:gravity="center"
             android:textSize="20sp"
             android:textColor="@color/white"
@@ -120,8 +120,6 @@
 
 
     </LinearLayout>
-
-
 
 
 </RelativeLayout>

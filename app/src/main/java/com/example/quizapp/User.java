@@ -19,6 +19,16 @@ public class User {
 
     private String password;
 
+    private String completedlvl1;
+    private String completedlvl2;
+    private String completedlvl3;
+
+    private int lvl1bestattempt;
+    private int lvl2bestattempt;
+    private int lvl3bestattempt;
+    private int lvl4bestattempt;
+
+
     private String username;
 
     public String getUsername() {

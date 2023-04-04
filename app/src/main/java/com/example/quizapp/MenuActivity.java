@@ -44,7 +44,7 @@ public class MenuActivity extends AppCompatActivity {
         TextView icon = (TextView) findViewById(R.id.usericon);
 
         Button konyhabutton = findViewById(R.id.konyhabutton);
-        User user = new User(currentUser.getEmail());
+        User user = new User(mAuth.getCurrentUser().getEmail());
 
         DatabaseReference userReference = FirebaseDatabase.getInstance("https://steng-dab96-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Users/");
 
@@ -79,6 +79,8 @@ public class MenuActivity extends AppCompatActivity {
                 Intent intent = new Intent(MenuActivity.this,QuizActivity.class);
                 intent.putExtra("topic","Konyha");
                 startActivity(intent);
+                recreate();
+
             }
         });
 
