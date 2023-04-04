@@ -68,7 +68,7 @@ public class QuizActivity extends AppCompatActivity {
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Betöltés....");
         progressDialog.show();
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://steng-dab96-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://steng-dab96-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Topics");
 
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {

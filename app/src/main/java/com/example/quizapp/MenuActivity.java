@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.internal.ManufacturerUtils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -33,10 +34,38 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuActivity.this,QuizActivity.class);
-                intent.putExtra("topic","konyha");
+                intent.putExtra("topic","Konyha");
                 startActivity(intent);
             }
         });
+
+        etterembutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this,QuizActivity.class);
+                intent.putExtra("topic","Etterem");
+                startActivity(intent);
+            }
+        });
+
+        karacsonybutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this,QuizActivity.class);
+                intent.putExtra("topic","Karacsony");
+                startActivity(intent);
+            }
+        });
+
+        edzoterembutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this,QuizActivity.class);
+                intent.putExtra("topic","Gym");
+                startActivity(intent);
+            }
+        });
+
 
 
         icon.setOnClickListener(new View.OnClickListener() {

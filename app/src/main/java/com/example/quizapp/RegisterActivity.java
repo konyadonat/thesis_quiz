@@ -26,13 +26,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.BreakIterator;
 
 public class RegisterActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
-
 
 
     @Override
@@ -45,6 +46,8 @@ public class RegisterActivity extends AppCompatActivity {
         EditText passwordAgainet = findViewById(R.id.editTextTextPassword2register);
         Button register = findViewById(R.id.registerbutton);
         ImageView logo = findViewById(R.id.imageView2);
+
+        DatabaseReference userReference = FirebaseDatabase.getInstance("https://steng-dab96-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Users");
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -65,8 +68,12 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()) {
-                                Toast.makeText(RegisterActivity.this, "Sikeres regisztráció!", Toast.LENGTH_SHORT).show();
+
                                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+
+                                userReference.push().setValue(user);
+                                Toast.makeText(RegisterActivity.this, "Sikeres regisztráció!", Toast.LENGTH_SHORT).show();
+                                finish();
                             } else {
                                 Toast.makeText(RegisterActivity.this, "Regisztrációs hiba: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
