@@ -13,10 +13,19 @@ import com.example.quizapp.exceptions.PasswordTooShortException;
 
 public class User {
 
+    //TODO fields that validate percentage
+    //TODO e.g level1passed=false; , ha megvan a level 1 80% akkor true és mehet a 2.szintre
     private String email;
 
     private String password;
 
+    private String username;
+
+    public String getUsername() {
+        int index = email.indexOf('@');
+        username = email.substring(0,index);
+        return username;
+    }
     private int score;
 
     public User(String email, String password) {
