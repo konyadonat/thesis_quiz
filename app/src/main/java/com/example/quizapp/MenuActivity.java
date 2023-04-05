@@ -106,6 +106,7 @@ public class MenuActivity extends AppCompatActivity {
                 Intent intent = new Intent(MenuActivity.this,QuizActivity.class);
                 intent.putExtra("topic","Etterem");
                 startActivity(intent);
+                recreate();
             }
         });
 
@@ -115,6 +116,7 @@ public class MenuActivity extends AppCompatActivity {
                 Intent intent = new Intent(MenuActivity.this,QuizActivity.class);
                 intent.putExtra("topic","Karacsony");
                 startActivity(intent);
+                recreate();
             }
         });
 
@@ -124,6 +126,7 @@ public class MenuActivity extends AppCompatActivity {
                 Intent intent = new Intent(MenuActivity.this,QuizActivity.class);
                 intent.putExtra("topic","Gym");
                 startActivity(intent);
+                recreate();
             }
         });
 
@@ -134,6 +137,7 @@ public class MenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MenuActivity.this,ProfileActivity.class);
                 startActivity(intent);
+                recreate();
             }
         });
 
