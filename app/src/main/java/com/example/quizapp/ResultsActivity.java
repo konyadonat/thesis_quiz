@@ -1,5 +1,6 @@
 package com.example.quizapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -15,12 +16,17 @@ import android.widget.Toast;
 import com.google.android.gms.dynamic.IFragmentWrapper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class ResultsActivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
 
+    String score;
     FirebaseAuth mAuth;
     Button resultsButton;
     private TextView result;
@@ -37,39 +43,138 @@ public class ResultsActivity extends AppCompatActivity {
         int correct = getIntent().getIntExtra("correct",0);
         String correctstring = String.valueOf(correct);
         int total = getIntent().getIntExtra("total",0);
-        double szazalek = (double)correct / (double)total;
-        String szazalekstring = String.valueOf(szazalek);
-
+        double szazalek = ((double)correct / (double)total)*100;
+        int szazalekint = (int)Math.round(szazalek);
+        String szazalekintstring = String.valueOf(szazalekint);
         //TODO READ DATA FROM DATABASE AND ONLY SET VALUES IF NEW VALUES ARE HIGHER
         DatabaseReference userReference = FirebaseDatabase.getInstance("https://steng-dab96-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Users/");
-
+        Query checkUser = userReference.orderByChild("username").equalTo(user.getUsername());
 
 
         switch (topic){
             case "Konyha":
-                //Todo//TODO temp String with szazalek value
-                //            //TODO user.set..lvl1besttry(temp)
-                userReference.child(user.getUsername()).child("lvl1bestattempt").setValue(szazalekstring);
-                            if (szazalek >= 0.8) {
+                checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()){
+                            score = snapshot.child(user.getUsername()).child("score").getValue(String.class);
+                            int scoreint = Integer.parseInt(score);
+                            scoreint+=correct;
+                            score = String.valueOf(scoreint);
+                            userReference.child(user.getUsername()).child("score").setValue(score);
+
+                            String besttrylvl1 = snapshot.child(user.getUsername()).child("lvl1bestattempt").getValue(String.class);
+                            int besttrylvl1int = Integer.parseInt(besttrylvl1);
+
+                            if (besttrylvl1int<szazalekint){
+                                userReference.child(user.getUsername()).child("lvl1bestattempt").setValue(szazalekintstring);
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                            if (szazalekint >= 80) {
                                 userReference.child(user.getUsername()).child("completedlvl1").setValue("true");
 
                             }
+                            break;
             case "Etterem":
-                if (szazalek >= 0.8) {
-                    //Todo user.setpassedlvl2 = "true"
+                checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()){
+                            score = snapshot.child(user.getUsername()).child("score").getValue(String.class);
+                            int scoreint = Integer.parseInt(score);
+                            scoreint+=correct;
+                            score = String.valueOf(scoreint);
+                            userReference.child(user.getUsername()).child("score").setValue(score);
+
+                            String besttrylvl2 = snapshot.child(user.getUsername()).child("lvl2bestattempt").getValue(String.class);
+                            int besttrylvl2int = Integer.parseInt(besttrylvl2);
+
+                            if (besttrylvl2int<szazalekint){
+                                userReference.child(user.getUsername()).child("lvl2bestattempt").setValue(szazalekintstring);
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                if (szazalekint >= 80) {
+                    userReference.child(user.getUsername()).child("completedlvl2").setValue("true");
+
                 }
+                break;
             case "Gym" :
-                if (szazalek >= 0.8) {
-                    //Todo user.setpassedlvl3 = "true"
+                checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()){
+                            score = snapshot.child(user.getUsername()).child("score").getValue(String.class);
+                            int scoreint = Integer.parseInt(score);
+                            scoreint+=correct;
+                            score = String.valueOf(scoreint);
+                            userReference.child(user.getUsername()).child("score").setValue(score);
+
+                            String besttrylvl3 = snapshot.child(user.getUsername()).child("lvl3bestattempt").getValue(String.class);
+                            int besttrylvl3int = Integer.parseInt(besttrylvl3);
+
+                            if (besttrylvl3int<szazalekint){
+                                userReference.child(user.getUsername()).child("lvl3bestattempt").setValue(szazalekintstring);
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                if (szazalekint >= 80) {
+                    userReference.child(user.getUsername()).child("completedlvl3").setValue("true");
+
                 }
+                break;
             case "Karacsony" :
-                if (szazalek >= 0.8) {
-                    //Todo user.setpassedlvl3 = "true"
-                }
-            default: break;
+                checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()){
+                            score = snapshot.child(user.getUsername()).child("score").getValue(String.class);
+                            int scoreint = Integer.parseInt(score);
+                            scoreint+=correct;
+                            score = String.valueOf(scoreint);
+                            userReference.child(user.getUsername()).child("score").setValue(score);
+
+                            String besttrylvl4 = snapshot.child(user.getUsername()).child("lvl4bestattempt").getValue(String.class);
+                            int besttrylvl4int = Integer.parseInt(besttrylvl4);
+
+                            if (besttrylvl4int<szazalekint){
+                                userReference.child(user.getUsername()).child("lvl4bestattempt").setValue(szazalekintstring);
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                break;
         }
 
-        result.setText("Jó válasz: " + correct+ " !" + "Totál %: " +szazalek);
+        result.setText("Jó válasz: " +correct + "\n" + "" + szazalekint+ " %");
 
         resultsButton = findViewById(R.id.resultsbutton);
 
