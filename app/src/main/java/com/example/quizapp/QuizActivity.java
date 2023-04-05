@@ -40,6 +40,7 @@ public class QuizActivity extends AppCompatActivity {
     private  int seconds = 0;
 
     private  List<QuestionList> questionLists = new ArrayList<>();
+    String getTopic;
 
     private int currentQuestionPosition = 0;
 
@@ -53,7 +54,7 @@ public class QuizActivity extends AppCompatActivity {
         TextView timer = findViewById(R.id.timer);
         question = findViewById(R.id.question);
         questions = findViewById(R.id.progresstextview);
-        String getTopic = getIntent().getStringExtra("topic");
+        getTopic = getIntent().getStringExtra("topic");
 
 
 
@@ -214,6 +215,7 @@ public class QuizActivity extends AppCompatActivity {
 
         else{
             Intent intent = new Intent(QuizActivity.this,ResultsActivity.class);
+            intent.putExtra("topic",getTopic);
             intent.putExtra("total",questionLists.size());
             intent.putExtra("correct",getCorrectAnsw());
             startActivity(intent);
@@ -241,6 +243,7 @@ public class QuizActivity extends AppCompatActivity {
                     Toast.makeText(QuizActivity.this, "Letelt az idő!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(QuizActivity.this,ResultsActivity.class);
                     intent.putExtra("correct", getCorrectAnsw());
+                    intent.putExtra("topic",getTopic);
                     startActivity(intent);
 
                     finish();
