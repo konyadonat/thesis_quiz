@@ -24,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MenuActivity extends AppCompatActivity {
     FirebaseUser currentUser;
@@ -63,7 +64,22 @@ public class MenuActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
                     coins = snapshot.child(user.getUsername()).child("score").getValue(String.class);
+                    String completedlevel1 = snapshot.child(user.getUsername()).child("completedlvl1").getValue(String.class);
+                    String completedlevel2 = snapshot.child(user.getUsername()).child("completedlvl2").getValue(String.class);
+                    String completedlevel3 = snapshot.child(user.getUsername()).child("completedlvl3").getValue(String.class);
 
+                    if (Objects.equals(completedlevel1, "false")){
+                        etterembutton.setClickable(false);
+                        etterembutton.setText("Először csináld meg az első szintet!");
+                    }
+                    if (Objects.equals(completedlevel2, "false")){
+                        edzoterembutton.setClickable(false);
+                        edzoterembutton.setText("Először csináld meg a második szintet!");
+                    }
+                    if (Objects.equals(completedlevel3, "false")){
+                        karacsonybutton.setClickable(false);
+                        karacsonybutton.setText("Először csináld meg a harmadik szintet!");
+                    }
                     score.setText(coins);
                 }
             }
