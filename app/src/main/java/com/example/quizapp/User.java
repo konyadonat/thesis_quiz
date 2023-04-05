@@ -23,11 +23,66 @@ public class User {
     private String completedlvl2;
     private String completedlvl3;
 
+    public String getCompletedlvl1() {
+        return completedlvl1;
+    }
+
+    public String getCompletedlvl2() {
+        return completedlvl2;
+    }
+
+    public String getCompletedlvl3() {
+        return completedlvl3;
+    }
+
+    public int getLvl1bestattempt() {
+        return lvl1bestattempt;
+    }
+
+    public int getLvl2bestattempt() {
+        return lvl2bestattempt;
+    }
+
+    public int getLvl3bestattempt() {
+        return lvl3bestattempt;
+    }
+
+    public int getLvl4bestattempt() {
+        return lvl4bestattempt;
+    }
+
     private int lvl1bestattempt;
     private int lvl2bestattempt;
     private int lvl3bestattempt;
     private int lvl4bestattempt;
 
+    public void setCompletedlvl1(String completedlvl1) {
+        this.completedlvl1 = completedlvl1;
+    }
+
+    public void setCompletedlvl2(String completedlvl2) {
+        this.completedlvl2 = completedlvl2;
+    }
+
+    public void setCompletedlvl3(String completedlvl3) {
+        this.completedlvl3 = completedlvl3;
+    }
+
+    public void setLvl1bestattempt(int lvl1bestattempt) {
+        this.lvl1bestattempt = lvl1bestattempt;
+    }
+
+    public void setLvl2bestattempt(int lvl2bestattempt) {
+        this.lvl2bestattempt = lvl2bestattempt;
+    }
+
+    public void setLvl3bestattempt(int lvl3bestattempt) {
+        this.lvl3bestattempt = lvl3bestattempt;
+    }
+
+    public void setLvl4bestattempt(int lvl4bestattempt) {
+        this.lvl4bestattempt = lvl4bestattempt;
+    }
 
     private String username;
 
@@ -40,6 +95,13 @@ public class User {
 
     public User(String email) {
         this.email = email;
+        this.completedlvl1 = "false";
+        this.completedlvl2 = "false";
+        this.completedlvl3 = "false";
+        this.lvl1bestattempt = 0;
+        this.lvl2bestattempt = 0;
+        this.lvl3bestattempt = 0;
+        this.lvl4bestattempt = 0;
     }
 
     public User(String email, String password) {
