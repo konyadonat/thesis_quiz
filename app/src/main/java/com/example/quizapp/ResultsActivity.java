@@ -46,7 +46,6 @@ public class ResultsActivity extends AppCompatActivity {
         double szazalek = ((double)correct / (double)total)*100;
         int szazalekint = (int)Math.round(szazalek);
         String szazalekintstring = String.valueOf(szazalekint);
-        //TODO READ DATA FROM DATABASE AND ONLY SET VALUES IF NEW VALUES ARE HIGHER
         DatabaseReference userReference = FirebaseDatabase.getInstance("https://steng-dab96-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Users/");
         Query checkUser = userReference.orderByChild("username").equalTo(user.getUsername());
         DatabaseReference levelReference = FirebaseDatabase.getInstance("https://steng-dab96-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Levels/");
