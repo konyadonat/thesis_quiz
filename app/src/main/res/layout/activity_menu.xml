@@ -78,41 +78,45 @@
         android:paddingTop="40dp"
         android:orientation="vertical">
 
-        <com.google.android.material.button.MaterialButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/konyhabutton"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_margin="16dp"
             android:layout_marginBottom="16dp"
+            android:background="@drawable/round_back_white"
             android:gravity="center"
             android:text="Konyha"
             android:textStyle="bold" />
 
-        <com.google.android.material.button.MaterialButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/etterembutton"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_margin="16dp"
             android:layout_marginBottom="16dp"
+            android:background="@drawable/round_back_white"
             android:gravity="center"
             android:text="Éttermi társalgás"
             android:textStyle="bold" />
 
-        <com.google.android.material.button.MaterialButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/edzoterembutton"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_margin="16dp"
             android:layout_marginBottom="16dp"
+            android:background="@drawable/round_back_white"
             android:gravity="center"
             android:text="Edzőtermi tárgyak"
             android:textStyle="bold" />
 
-        <com.google.android.material.button.MaterialButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/karacsonybutton"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_margin="16dp"
+            android:background="@drawable/round_back_white"
             android:layout_marginBottom="16dp"
             android:gravity="center"
             android:text="Karácsony"
