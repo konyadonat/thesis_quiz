@@ -63,6 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
             try {
                 user.setEmail(email);
                 user.setPassword(password);
+                levels.setUsername(user.getUsername());
                 //int index = email.indexOf('@');
                 //String username = email.substring(0,index);
 
