@@ -44,7 +44,7 @@
             android:textSize="30dp"
             android:layout_marginRight="30dp"
             android:layout_weight="0"
-            android:background="@drawable/baseline_point_of_sale_24" />
+            android:background="@drawable/baseline_school_24" />
 
         <TextView
             android:ellipsize="end"
