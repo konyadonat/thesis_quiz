@@ -73,14 +73,17 @@ public class MenuActivity extends AppCompatActivity {
 
                     if (Objects.equals(completedlevel1, "false")){
                         etterembutton.setClickable(false);
+                        etterembutton.setBackgroundResource(R.drawable.round_back_grey);
                         etterembutton.setText("Először csináld meg az első szintet!");
                     }
                     if (Objects.equals(completedlevel2, "false")){
                         edzoterembutton.setClickable(false);
+                        edzoterembutton.setBackgroundResource(R.drawable.round_back_grey);
                         edzoterembutton.setText("Először csináld meg a második szintet!");
                     }
                     if (Objects.equals(completedlevel3, "false")){
                         karacsonybutton.setClickable(false);
+                        karacsonybutton.setBackgroundResource(R.drawable.round_back_grey);
                         karacsonybutton.setText("Először csináld meg a harmadik szintet!");
                     }
                 }
