@@ -51,6 +51,8 @@ public class MenuActivity extends AppCompatActivity {
 
         DatabaseReference userReference = FirebaseDatabase.getInstance("https://steng-dab96-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Users/");
 
+        DatabaseReference levelsReference = FirebaseDatabase.getInstance("https://steng-dab96-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Levels/");
+
         email = findViewById(R.id.usersavtext);
         score = findViewById(R.id.score);
 
@@ -59,13 +61,12 @@ public class MenuActivity extends AppCompatActivity {
         Button karacsonybutton = findViewById(R.id.karacsonybutton);
         email.setText(user.getUsername());
 
-        Query checkUser = userReference.orderByChild("username").equalTo(user.getUsername());
+        Query checklevel = levelsReference.orderByChild("username").equalTo(user.getUsername());
 
-        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+        checklevel.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    coins = snapshot.child(user.getUsername()).child("score").getValue(String.class);
+                if (snapshot.exists()) {
                     String completedlevel1 = snapshot.child(user.getUsername()).child("completedlvl1").getValue(String.class);
                     String completedlevel2 = snapshot.child(user.getUsername()).child("completedlvl2").getValue(String.class);
                     String completedlevel3 = snapshot.child(user.getUsername()).child("completedlvl3").getValue(String.class);
@@ -82,6 +83,23 @@ public class MenuActivity extends AppCompatActivity {
                         karacsonybutton.setClickable(false);
                         karacsonybutton.setText("Először csináld meg a harmadik szintet!");
                     }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+        Query checkUser = userReference.orderByChild("username").equalTo(user.getUsername());
+
+        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    coins = snapshot.child(user.getUsername()).child("score").getValue(String.class);
                     score.setText(coins);
                 }
             }
