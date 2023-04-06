@@ -49,6 +49,9 @@ public class ResultsActivity extends AppCompatActivity {
         //TODO READ DATA FROM DATABASE AND ONLY SET VALUES IF NEW VALUES ARE HIGHER
         DatabaseReference userReference = FirebaseDatabase.getInstance("https://steng-dab96-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Users/");
         Query checkUser = userReference.orderByChild("username").equalTo(user.getUsername());
+        DatabaseReference levelReference = FirebaseDatabase.getInstance("https://steng-dab96-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Levels/");
+        Query checkLevel= levelReference.orderByChild("username").equalTo(user.getUsername());
+
 
 
         switch (topic){
@@ -62,14 +65,6 @@ public class ResultsActivity extends AppCompatActivity {
                             scoreint+=correct;
                             score = String.valueOf(scoreint);
                             userReference.child(user.getUsername()).child("score").setValue(score);
-
-                            String besttrylvl1 = snapshot.child(user.getUsername()).child("lvl1bestattempt").getValue(String.class);
-                            int besttrylvl1int = Integer.parseInt(besttrylvl1);
-
-                            if (besttrylvl1int<szazalekint){
-                                userReference.child(user.getUsername()).child("lvl1bestattempt").setValue(szazalekintstring);
-                            }
-
                         }
                     }
 
@@ -78,11 +73,31 @@ public class ResultsActivity extends AppCompatActivity {
 
                     }
                 });
+
+                checkLevel.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            String besttrylvl1 = snapshot.child(user.getUsername()).child("lvl1bestattempt").getValue(String.class);
+                            int besttrylvl1int = Integer.parseInt(besttrylvl1);
+
+                            if (besttrylvl1int<szazalekint){
+                                levelReference.child(user.getUsername()).child("lvl1bestattempt").setValue(szazalekintstring);
+                            }
+
                             if (szazalekint >= 80) {
-                                userReference.child(user.getUsername()).child("completedlvl1").setValue("true");
+                                levelReference.child(user.getUsername()).child("completedlvl1").setValue("true");
 
                             }
-                            break;
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                break;
             case "Etterem":
                 checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -93,14 +108,6 @@ public class ResultsActivity extends AppCompatActivity {
                             scoreint+=correct;
                             score = String.valueOf(scoreint);
                             userReference.child(user.getUsername()).child("score").setValue(score);
-
-                            String besttrylvl2 = snapshot.child(user.getUsername()).child("lvl2bestattempt").getValue(String.class);
-                            int besttrylvl2int = Integer.parseInt(besttrylvl2);
-
-                            if (besttrylvl2int<szazalekint){
-                                userReference.child(user.getUsername()).child("lvl2bestattempt").setValue(szazalekintstring);
-                            }
-
                         }
                     }
 
@@ -109,10 +116,30 @@ public class ResultsActivity extends AppCompatActivity {
 
                     }
                 });
-                if (szazalekint >= 80) {
-                    userReference.child(user.getUsername()).child("completedlvl2").setValue("true");
 
-                }
+                checkLevel.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            String besttrylvl2 = snapshot.child(user.getUsername()).child("lvl2bestattempt").getValue(String.class);
+                            int besttrylvl2int = Integer.parseInt(besttrylvl2);
+
+                            if (besttrylvl2int<szazalekint){
+                                levelReference.child(user.getUsername()).child("lvl2bestattempt").setValue(szazalekintstring);
+                            }
+
+                            if (szazalekint >= 80) {
+                                levelReference.child(user.getUsername()).child("completedlvl2").setValue("true");
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
                 break;
             case "Gym" :
                 checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -124,14 +151,6 @@ public class ResultsActivity extends AppCompatActivity {
                             scoreint+=correct;
                             score = String.valueOf(scoreint);
                             userReference.child(user.getUsername()).child("score").setValue(score);
-
-                            String besttrylvl3 = snapshot.child(user.getUsername()).child("lvl3bestattempt").getValue(String.class);
-                            int besttrylvl3int = Integer.parseInt(besttrylvl3);
-
-                            if (besttrylvl3int<szazalekint){
-                                userReference.child(user.getUsername()).child("lvl3bestattempt").setValue(szazalekintstring);
-                            }
-
                         }
                     }
 
@@ -140,10 +159,30 @@ public class ResultsActivity extends AppCompatActivity {
 
                     }
                 });
-                if (szazalekint >= 80) {
-                    userReference.child(user.getUsername()).child("completedlvl3").setValue("true");
 
-                }
+                checkLevel.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            String besttrylvl3 = snapshot.child(user.getUsername()).child("lvl3bestattempt").getValue(String.class);
+                            int besttrylvl3int = Integer.parseInt(besttrylvl3);
+
+                            if (besttrylvl3int<szazalekint){
+                                levelReference.child(user.getUsername()).child("lvl3bestattempt").setValue(szazalekintstring);
+                            }
+
+                            if (szazalekint >= 80) {
+                                levelReference.child(user.getUsername()).child("completedlvl3").setValue("true");
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
                 break;
             case "Karacsony" :
                 checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -155,14 +194,30 @@ public class ResultsActivity extends AppCompatActivity {
                             scoreint+=correct;
                             score = String.valueOf(scoreint);
                             userReference.child(user.getUsername()).child("score").setValue(score);
+                        }
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+                checkLevel.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
                             String besttrylvl4 = snapshot.child(user.getUsername()).child("lvl4bestattempt").getValue(String.class);
                             int besttrylvl4int = Integer.parseInt(besttrylvl4);
 
                             if (besttrylvl4int<szazalekint){
-                                userReference.child(user.getUsername()).child("lvl4bestattempt").setValue(szazalekintstring);
+                                levelReference.child(user.getUsername()).child("lvl4bestattempt").setValue(szazalekintstring);
                             }
 
+                            if (szazalekint >= 80) {
+                                levelReference.child(user.getUsername()).child("completedlvl4").setValue("true");
+
+                            }
                         }
                     }
 
