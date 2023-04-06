@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.quizapp.exceptions.EmailEmptyException;
@@ -39,6 +40,15 @@ public class LoginActivity extends AppCompatActivity {
         EditText passwordet = findViewById(R.id.editTextTextPassword);
         Button login = findViewById(R.id.button);
 
+        TextView forgotpwtv = findViewById(R.id.loginforgotpasswordtv);
+
+        forgotpwtv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,ForgotPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
 
         Button registerbutton = findViewById(R.id.registerbuttoninlogin);
 
@@ -47,7 +57,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
 
