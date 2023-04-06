@@ -13,6 +13,15 @@ public class Levels {
     String lvl3bestattempt;
     String lvl4bestattempt;
 
+    String username;
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
 
     Levels() {
         this.completedlvl1 = "false";
