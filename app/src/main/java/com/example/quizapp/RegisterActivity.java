@@ -48,6 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
         ImageView logo = findViewById(R.id.imageView2);
 
         DatabaseReference userReference = FirebaseDatabase.getInstance("https://steng-dab96-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Users");
+        DatabaseReference levelReference = FirebaseDatabase.getInstance("https://steng-dab96-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Levels");
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -57,7 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
         register.setOnClickListener(view -> {
             String email = emailet.getText().toString();
             String password = passwordet.getText().toString();
-
+            Levels levels = new Levels();
             User user = new User();
             try {
                 user.setEmail(email);
@@ -75,6 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
 
                                 userReference.child(user.getUsername()).setValue(user);
+                                levelReference.child(user.getUsername()).setValue(levels);
                                 Toast.makeText(RegisterActivity.this, "Sikeres regisztráció!", Toast.LENGTH_SHORT).show();
                                 finish();
                             } else {
