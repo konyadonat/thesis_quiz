@@ -13,10 +13,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -28,12 +31,17 @@ public class QuizActivity extends AppCompatActivity {
 
     private TextView questions;
     private TextView question;
+    TextView username;
+    TextView topic;
 
     private Button option1,option2,option3,option4;
 
     private Button submit;
 
     private Timer quizTimer;
+
+    FirebaseUser currentUser;
+    FirebaseAuth mAuth;
 
     private int totalTimeInMisn = 1;
 
@@ -51,13 +59,20 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
+        currentUser = LoginActivity.currentuser;
+        mAuth = FirebaseAuth.getInstance();
+
+        User user = new User(mAuth.getCurrentUser().getEmail());
+
+
         TextView timer = findViewById(R.id.timer);
         question = findViewById(R.id.question);
         questions = findViewById(R.id.progresstextview);
         getTopic = getIntent().getStringExtra("topic");
 
 
-
+        username = findViewById(R.id.usersavtext);
+        topic = findViewById(R.id.topictv);
         option1 = findViewById(R.id.option1);
         option2 = findViewById(R.id.option2);
         option3 = findViewById(R.id.option3);
@@ -69,6 +84,10 @@ public class QuizActivity extends AppCompatActivity {
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Betöltés....");
         progressDialog.show();
+
+        topic.setText(getTopic);
+        username.setText(user.getUsername());
+
         DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://steng-dab96-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Topics");
 
 
@@ -193,16 +212,16 @@ public class QuizActivity extends AppCompatActivity {
         if (currentQuestionPosition < questionLists.size()) {
             selectedOption = "";
 
-            option1.setBackgroundResource(R.drawable.round_back_white_stroke);
+            option1.setBackgroundResource(R.drawable.round_back_white);
             option1.setTextColor(Color.parseColor("#1F6BB8"));
 
-            option2.setBackgroundResource(R.drawable.round_back_white_stroke);
+            option2.setBackgroundResource(R.drawable.round_back_white);
             option2.setTextColor(Color.parseColor("#1F6BB8"));
 
-            option3.setBackgroundResource(R.drawable.round_back_white_stroke);
+            option3.setBackgroundResource(R.drawable.round_back_white);
             option3.setTextColor(Color.parseColor("#1F6BB8"));
 
-            option4.setBackgroundResource(R.drawable.round_back_white_stroke);
+            option4.setBackgroundResource(R.drawable.round_back_white);
             option4.setTextColor(Color.parseColor("#1F6BB8"));
 
             questions.setText((currentQuestionPosition+1)+"/"+questionLists.size());
