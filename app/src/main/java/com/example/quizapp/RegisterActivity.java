@@ -81,42 +81,47 @@ public class RegisterActivity extends AppCompatActivity {
                 //String username = email.substring(0,index);
 
                 if(passwordAgainet.getText().toString().equals(password)) {
-                    mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    Query checkUsername = userReference.orderByChild("username").equalTo(user.getUsername());
+
+                    checkUsername.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()) {
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (!snapshot.exists()) {
+                                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
 
-                                //TODO CHECK IF USERNAME ALREADY EXISTS
-                                Query checkUsername = userReference.orderByChild("username").equalTo(user.getUsername());
-                                checkUsername.addListenerForSingleValueEvent(new ValueEventListener() {
+                                userReference.child(user.getUsername()).setValue(user);
+                                levelReference.child(user.getUsername()).setValue(levels);
+
+                                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                     @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        if (snapshot.exists()) {
-                                            emailet.setError("Ezzel az email címmel már regisztráltak!");
-                                            emailet.setText("");
-                                            emailet.requestFocus();
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if(task.isSuccessful()) {
+
+                                            //TODO CHECK IF USERNAME ALREADY EXISTS
+
+
+
+                                        } else {
+                                            Toast.makeText(RegisterActivity.this, "Regisztrációs hiba: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                         }
-                                        else{
-                                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-
-                                            userReference.child(user.getUsername()).setValue(user);
-                                            levelReference.child(user.getUsername()).setValue(levels);
-                                            Toast.makeText(RegisterActivity.this, "Sikeres regisztráció!", Toast.LENGTH_SHORT).show();
-                                            finish();
-                                        }
-
-
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-
                                     }
                                 });
-
-                            } else {
-                                Toast.makeText(RegisterActivity.this, "Regisztrációs hiba: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                
+                                Toast.makeText(RegisterActivity.this, "Sikeres regisztráció!", Toast.LENGTH_SHORT).show();
+                                finish();
                             }
+                            else{
+                                emailet.setError("Ezzel az email címmel már regisztráltak!");
+                                emailet.setText("");
+                                emailet.requestFocus();
+                            }
+
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
                         }
                     });
                 }
