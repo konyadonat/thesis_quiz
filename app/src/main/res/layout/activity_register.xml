@@ -1,93 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/registerrelative"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".RegisterActivity">
+    tools:context=".RegisterActivity"
+    android:padding="16dp">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="360dp"
-        android:layout_height="301dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/stenglogo">
 
-    </ImageView>
-
-    <EditText
-        android:id="@+id/editTextTextEmailAddressregister"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/registerimageviewlinear"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/round_edittext"
-        android:ems="10"
-        android:hint="E-Mail"
-        android:inputType="textEmailAddress"
-        android:minHeight="48dp"
-        android:textAlignment="center"
-        android:verticalScrollbarPosition="defaultPosition"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPasswordregister"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"
-        app:layout_constraintVertical_bias="0.468" />
+        android:gravity="center">
 
-    <EditText
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/stenglogo"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/registeregistertvlinear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_below="@id/registerimageviewlinear">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="Regisztráció"
+            android:textSize="48sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/registeremailevlinear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_below="@id/registeregistertvlinear"
+        android:layout_marginTop="20dp">
+
+
+        <EditText
+            android:id="@+id/editTextTextEmailAddressregister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_edittext"
+            android:ems="10"
+            android:hint="E-Mail"
+            android:inputType="textEmailAddress"
+            android:minHeight="48dp"
+            android:textAlignment="center"
+            android:verticalScrollbarPosition="defaultPosition" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/registerpasswordetlinear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_below="@id/registeremailevlinear"
+        android:layout_marginTop="20dp">
+
+        <EditText
         android:id="@+id/editTextTextPasswordregister"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/round_edittext"
         android:ems="10"
         android:hint="Jelszó"
+            android:layout_marginRight="10dp"
         android:inputType="textPassword"
+            android:layout_weight="01"
         android:minHeight="48dp"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/registerbutton"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        android:textAlignment="center" />
 
-    <Button
-        android:id="@+id/registerbutton"
-        android:layout_width="359dp"
-        android:layout_height="64dp"
-        android:layout_marginBottom="16dp"
-        android:text="Regisztráció"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView6"
-        app:layout_constraintStart_toStartOf="@+id/textView6" />
+        <EditText
+            android:id="@+id/editTextTextPassword2register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_edittext"
+            android:ems="10"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:hint="Jelszó újra"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:textAlignment="center"
+            />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/registerusernameetlinear"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textColor="@color/white"
-        android:text="Regisztráció"
-        android:textSize="48sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        android:layout_below="@+id/registerpasswordetlinear"
+        android:gravity="center"
+        android:layout_marginTop="20dp">
 
-    <EditText
-        android:id="@+id/editTextTextPassword2register"
-        android:layout_width="0dp"
+        <EditText
+            android:id="@+id/editTextTextUsernameRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_edittext"
+            android:ems="10"
+            android:layout_weight="1"
+            android:hint="Felhasználónév"
+            android:minHeight="48dp"
+            android:textAlignment="center"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/registerregisterbuttonrelative"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/round_edittext"
-        android:ems="10"
-        android:hint="Jelszó újra"
-        android:inputType="textPassword"
-        android:minHeight="48dp"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/registerbutton"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPasswordregister" />
+        android:layout_marginTop="40dp"
+        android:padding="10dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/registerbuttoninlogin"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
+            android:padding="10dp"
+            android:text="Vissza"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:background="@drawable/round_back_red"
+            >
+
+        </androidx.appcompat.widget.AppCompatButton>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/registerbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:textSize="20dp"
+            android:text="Regisztráció"
+            android:background="@drawable/round_back_green"
+            />
+    </LinearLayout>
+
+
+
+
+
+
+</RelativeLayout>
