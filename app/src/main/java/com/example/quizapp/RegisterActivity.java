@@ -41,6 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        Button backtologin = findViewById(R.id.registerbackbutton);
         EditText emailet = findViewById(R.id.editTextTextEmailAddressregister);
         EditText passwordet = findViewById(R.id.editTextTextPasswordregister);
         EditText passwordAgainet = findViewById(R.id.editTextTextPassword2register);
@@ -49,6 +50,14 @@ public class RegisterActivity extends AppCompatActivity {
 
         DatabaseReference userReference = FirebaseDatabase.getInstance("https://steng-dab96-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Users");
         DatabaseReference levelReference = FirebaseDatabase.getInstance("https://steng-dab96-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Levels");
+
+
+        backtologin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         mAuth = FirebaseAuth.getInstance();
 

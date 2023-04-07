@@ -32,6 +32,14 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
         TextView emailtv = findViewById(R.id.editTextForgotPassword);
         Button resetpw = findViewById(R.id.forgotpasswordbutton);
+        Button backtoLogin = findViewById(R.id.forgotpwbackbutton);
+
+        backtoLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         resetpw.setOnClickListener(new View.OnClickListener() {
             @Override
