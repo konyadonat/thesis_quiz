@@ -5,106 +5,137 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_alignWithParentIfMissing="false"
-    android:padding="40dp"
+    android:padding="16dp"
     tools:context=".ProfileActivity"
-    android:background="@drawable/background">
+    android:background="@drawable/background"
+    android:id="@+id/profilerelative" >
 
 
     <LinearLayout
         android:id="@+id/avatarlayout"
         android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center">
         <ImageView
             android:id="@+id/avatar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/stenglogo">
+        </ImageView>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/profilecredentialslinear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/avatarlayout"
+        android:layout_marginTop="-1dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/mustacheavatar">
-        </ImageView>
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="20dp"
+            android:text="Felhasználói adatok"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="48sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
 
-
-
-
     <LinearLayout
-        android:id="@+id/emailprofile"
+
         android:layout_width="match_parent"
-        android:layout_below="@id/avatarlayout"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="40dp"
-        android:textAlignment="center">
+        android:id="@+id/profileemaillinear"
+        android:layout_below="@id/profilecredentialslinear"
+        android:layout_marginTop="10dp"
+        android:gravity="center">
 
         <EditText
             android:id="@+id/profileemail"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:hint="User email"
             android:background="@drawable/round_edittext"
-            android:layout_weight="0.9"
-            android:textColorHint="@color/black"
-            android:textStyle="bold"
+            android:drawableEnd="@drawable/baseline_alternate_email_24_black"
+            android:focusable="false"
+            android:gravity="center"
+            android:hint=""
+            android:minWidth="48dp"
             android:minHeight="48dp"
-            android:drawableEnd="@drawable/baseline_recycling_24_black">
-        </EditText>
+            android:textColorHint="@color/black"
+            android:textStyle="bold"></EditText>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/passwordprofile"
         android:layout_width="match_parent"
-        android:layout_below="@id/emailprofile"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="40dp"
-        android:textAlignment="center">
+        android:id="@+id/profilescorelinear"
+        android:layout_below="@id/profileemaillinear"
+        android:layout_marginTop="10dp"
+        android:gravity="center">
 
         <EditText
-            android:id="@+id/profilepassword"
-            android:layout_width="wrap_content"
+            android:id="@+id/profilescore"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:hint="User password"
             android:background="@drawable/round_edittext"
-            android:layout_weight="0.9"
-            android:textColorHint="@color/black"
-            android:textStyle="bold"
+            android:drawableEnd="@drawable/baseline_school_24_black"
+            android:focusable="false"
+            android:hint=""
+            android:minWidth="48dp"
             android:minHeight="48dp"
-            android:drawableEnd="@drawable/baseline_recycling_24_black">
-        </EditText>
+            android:textAlignment="center"
+            android:textColorHint="@color/black"
+            android:textStyle="bold"></EditText>
+
+
     </LinearLayout>
 
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/profilechangedatas"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/profilelogoutlinear"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:text="Adatok frissítése!"
-        android:layout_below="@id/passwordprofile"
-        android:layout_marginTop="20dp">
-    </androidx.appcompat.widget.AppCompatButton>
-
-
-    <Button
-        android:id="@+id/profilelogutbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:padding="10dp"
         android:layout_alignParentBottom="true"
-        android:gravity="center"
-        android:text="Kijelentkezés!"
-        android:textColor="@color/white"
-        android:layout_alignEnd="@id/passwordprofile"
-        android:textStyle="bold">
+        android:gravity="center">
 
-    </Button>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/profilelogutbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/round_back_red"
+            android:padding="10dp"
+            android:text="Kijelentkezés"
+            android:textSize="20dp"
+            android:textStyle="bold">
+
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/profilebackbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/round_back_green"
+            android:padding="10dp"
+            android:text="Vissza"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 </RelativeLayout>
