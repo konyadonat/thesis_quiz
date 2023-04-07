@@ -26,8 +26,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.BreakIterator;
 
@@ -82,13 +86,34 @@ public class RegisterActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()) {
 
+                                //TODO CHECK IF USERNAME ALREADY EXISTS
+                                Query checkUsername = userReference.orderByChild("username").equalTo(user.getUsername());
+                                checkUsername.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        if (snapshot.exists()) {
+                                            emailet.setError("Ezzel az email címmel már regisztráltak!");
+                                            emailet.setText("");
+                                            emailet.requestFocus();
+                                        }
+                                        else{
+                                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
 
-                                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                                            userReference.child(user.getUsername()).setValue(user);
+                                            levelReference.child(user.getUsername()).setValue(levels);
+                                            Toast.makeText(RegisterActivity.this, "Sikeres regisztráció!", Toast.LENGTH_SHORT).show();
+                                            finish();
+                                        }
 
-                                userReference.child(user.getUsername()).setValue(user);
-                                levelReference.child(user.getUsername()).setValue(levels);
-                                Toast.makeText(RegisterActivity.this, "Sikeres regisztráció!", Toast.LENGTH_SHORT).show();
-                                finish();
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+
                             } else {
                                 Toast.makeText(RegisterActivity.this, "Regisztrációs hiba: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
