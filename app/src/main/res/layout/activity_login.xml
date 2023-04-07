@@ -65,8 +65,7 @@
             android:inputType="textEmailAddress"
             android:minHeight="48dp"
             android:textAlignment="center"
-            android:verticalScrollbarPosition="defaultPosition"
-             />
+            android:verticalScrollbarPosition="defaultPosition" />
 
     </LinearLayout>
 
@@ -118,13 +117,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:layout_below="@id/loginforgotpasswordlinear"
+        android:layout_alignParentBottom="true"
         android:gravity="center">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/registerbuttoninlogin"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginEnd="10dp"
             android:padding="10dp"
             android:text="Regisztráció"
@@ -139,7 +138,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginStart="10dp"
             android:textStyle="bold"
             android:padding="10dp"
