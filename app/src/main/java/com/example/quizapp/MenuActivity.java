@@ -119,7 +119,6 @@ public class MenuActivity extends AppCompatActivity {
                 intent.putExtra("topic","Konyha");
                 startActivity(intent);
                 recreate();
-                finish();
 
             }
         });
@@ -131,7 +130,6 @@ public class MenuActivity extends AppCompatActivity {
                 intent.putExtra("topic","Etterem");
                 startActivity(intent);
                 recreate();
-                finish();
             }
         });
 
@@ -142,7 +140,6 @@ public class MenuActivity extends AppCompatActivity {
                 intent.putExtra("topic","Karacsony");
                 startActivity(intent);
                 recreate();
-                finish();
             }
         });
 
@@ -153,7 +150,6 @@ public class MenuActivity extends AppCompatActivity {
                 intent.putExtra("topic","Gym");
                 startActivity(intent);
                 recreate();
-                finish();
             }
         });
 
@@ -165,6 +161,7 @@ public class MenuActivity extends AppCompatActivity {
                 Intent intent = new Intent(MenuActivity.this,ProfileActivity.class);
                 startActivity(intent);
                 recreate();
+                finish();
             }
         });
     }
