@@ -107,28 +107,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/registerusernameetlinear"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/registerpasswordetlinear"
-        android:gravity="center"
-        android:layout_marginTop="20dp">
-
-        <EditText
-            android:id="@+id/editTextTextUsernameRegister"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/round_edittext"
-            android:ems="10"
-            android:layout_weight="1"
-            android:hint="Felhasználónév"
-            android:minHeight="48dp"
-            android:textAlignment="center"
-            />
-    </LinearLayout>
-
-
-    <LinearLayout
         android:id="@+id/registerregisterbuttonrelative"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
