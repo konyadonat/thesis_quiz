@@ -16,9 +16,6 @@ public class User {
 
     private String password;
 
-
-    //TODO MAKE USERNAME MANDATORY
-
     private String username;
 
     public String getUsername() {

@@ -77,8 +77,6 @@ public class RegisterActivity extends AppCompatActivity {
                 user.setEmail(email);
                 user.setPassword(password);
                 levels.setUsername(user.getUsername());
-                //int index = email.indexOf('@');
-                //String username = email.substring(0,index);
 
                 if(passwordAgainet.getText().toString().equals(password)) {
                     Query checkUsername = userReference.orderByChild("username").equalTo(user.getUsername());
@@ -96,8 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         if(task.isSuccessful()) {
-
-                                            //TODO CHECK IF USERNAME ALREADY EXISTS
+                                            
 
 
 
