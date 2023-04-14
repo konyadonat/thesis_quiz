@@ -43,9 +43,9 @@ public class QuizActivity extends AppCompatActivity {
     FirebaseUser currentUser;
     FirebaseAuth mAuth;
 
-    private int totalTimeInMisn = 1;
+    private int totalTimeInMisn = 0;
 
-    private  int seconds = 0;
+    private  int seconds = 59;
 
     private  List<QuestionList> questionLists = new ArrayList<>();
     String getTopic;
@@ -243,7 +243,6 @@ public class QuizActivity extends AppCompatActivity {
         }
     }
 
-    //TODO FIX TIMER IF IT IS 0 THEN CANCEL CURRENT QUIZ
     private void startTimer(TextView timertv)
     {
         quizTimer = new Timer();
@@ -255,11 +254,10 @@ public class QuizActivity extends AppCompatActivity {
                     totalTimeInMisn--;
                     seconds = 59;
                 }
-                else if(seconds == 0 && totalTimeInMisn == 0) {
+                else if(totalTimeInMisn < 0) {
                     quizTimer.purge();
                     quizTimer.cancel();
 
-                    Toast.makeText(QuizActivity.this, "Letelt az idő!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(QuizActivity.this,ResultsActivity.class);
                     intent.putExtra("correct", getCorrectAnsw());
                     intent.putExtra("topic",getTopic);
@@ -269,13 +267,13 @@ public class QuizActivity extends AppCompatActivity {
                 }
                 else{
                     seconds--;
+
                 }
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         String mins = String.valueOf(totalTimeInMisn);
                         String secs = String.valueOf(seconds);
-
                         if (mins.length() == 1) {
                             mins = "0" + mins;
                         }
@@ -295,16 +293,21 @@ public class QuizActivity extends AppCompatActivity {
 
     private int getCorrectAnsw() {
         int correctAnswers = 0;
+        try {
 
-        for (int i = 0; i<questionLists.size();i++) {
-            String getUserSelectedAnsw = questionLists.get(i).getUserSelectedAnswer();
-            final String getAnsw = questionLists.get(i).getAnswer();
+            for (int i = 0; i < questionLists.size(); i++) {
+                String getUserSelectedAnsw = questionLists.get(i).getUserSelectedAnswer();
+                final String getAnsw = questionLists.get(i).getAnswer();
 
-            if (getUserSelectedAnsw.equals(getAnsw)) {
-                correctAnswers++;
+                if (getUserSelectedAnsw.equals(getAnsw)) {
+                    correctAnswers++;
+                }
             }
+            return correctAnswers;
         }
-        return correctAnswers;
+        catch (Exception e){
+            return correctAnswers;
+        }
     }
 
     private void revealAnsw() {

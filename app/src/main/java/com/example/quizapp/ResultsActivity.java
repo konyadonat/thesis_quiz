@@ -41,7 +41,6 @@ public class ResultsActivity extends AppCompatActivity {
         User user = new User(mAuth.getCurrentUser().getEmail());
         result = findViewById(R.id.correctanswersresult);
         int correct = getIntent().getIntExtra("correct",0);
-        String correctstring = String.valueOf(correct);
         int total = getIntent().getIntExtra("total",0);
         double szazalek = ((double)correct / (double)total)*100;
         int szazalekint = (int)Math.round(szazalek);
@@ -228,7 +227,7 @@ public class ResultsActivity extends AppCompatActivity {
                 break;
         }
 
-        result.setText("Jó válasz: " +correct + "\n" + "" + szazalekint+ " %");
+        result.setText("Jó válasz: "+correct);
 
         resultsButton = findViewById(R.id.resultsbutton);
 
