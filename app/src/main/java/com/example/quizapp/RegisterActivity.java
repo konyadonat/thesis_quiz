@@ -54,6 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         DatabaseReference userReference = FirebaseDatabase.getInstance("https://steng-dab96-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Users");
         DatabaseReference levelReference = FirebaseDatabase.getInstance("https://steng-dab96-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Levels");
+        DatabaseReference badgeReference = FirebaseDatabase.getInstance("https://steng-dab96-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Badges");
 
 
         backtologin.setOnClickListener(new View.OnClickListener() {
@@ -73,10 +74,12 @@ public class RegisterActivity extends AppCompatActivity {
             String password = passwordet.getText().toString();
             Levels levels = new Levels();
             User user = new User();
+            Badge badge = new Badge();
             try {
                 user.setEmail(email);
                 user.setPassword(password);
                 levels.setUsername(user.getUsername());
+                badge.setUsername(user.getUsername());
 
                 if(passwordAgainet.getText().toString().equals(password)) {
                     Query checkUsername = userReference.orderByChild("username").equalTo(user.getUsername());
@@ -89,6 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                                 userReference.child(user.getUsername()).setValue(user);
                                 levelReference.child(user.getUsername()).setValue(levels);
+                                badgeReference.child(user.getUsername()).setValue(badge);
 
                                 mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                     @Override
