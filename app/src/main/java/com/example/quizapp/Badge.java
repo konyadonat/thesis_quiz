@@ -11,12 +11,6 @@ public class Badge {
     private String score100;
 
 
-    //TODO IF I HAVE MORE TIME
-    //private String streak5;
-    //private String streak10;
-    //private String streak25;
-
-
     private String username;
 
     public String getCompletedlevel2() {
