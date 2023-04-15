@@ -14,7 +14,7 @@
     <LinearLayout
         android:id="@+id/avatarlayout"
         android:layout_centerHorizontal="true"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center">
         <ImageView
@@ -31,7 +31,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/avatarlayout"
-        android:layout_marginTop="-1dp"
         android:gravity="center">
 
         <TextView
@@ -39,9 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="20dp"
-            android:text="Felhasználói adatok"
+            android:text="Adatok"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="48sp"
@@ -101,6 +98,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/badgelinear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/profilescorelinear"
@@ -114,6 +112,8 @@
             android:layout_height="50dp"
             android:background="@drawable/level1"
             android:layout_margin="5dp"
+            android:visibility="invisible"
+
         />
         <ImageView
             android:id="@+id/level2badge"
@@ -121,6 +121,7 @@
             android:layout_height="50dp"
             android:background="@drawable/level2"
             android:layout_margin="5dp"
+            android:visibility="invisible"
             />
         <ImageView
             android:id="@+id/level3badge"
@@ -128,6 +129,7 @@
             android:layout_height="50dp"
             android:background="@drawable/level3"
             android:layout_margin="5dp"
+            android:visibility="invisible"
             />
         <ImageView
             android:id="@+id/level4badge"
@@ -135,6 +137,7 @@
             android:layout_height="50dp"
             android:background="@drawable/level4"
             android:layout_margin="5dp"
+            android:visibility="invisible"
             />
 
         <ImageView
@@ -143,6 +146,7 @@
             android:layout_height="50dp"
             android:background="@drawable/score50"
             android:layout_margin="5dp"
+            android:visibility="invisible"
             />
 
         <ImageView
@@ -151,6 +155,7 @@
             android:layout_height="50dp"
             android:background="@drawable/score100"
             android:layout_margin="5dp"
+            android:visibility="invisible"
             />
     </LinearLayout>
 
@@ -161,16 +166,15 @@
         android:id="@+id/profilelogoutlinear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:padding="10dp"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/badgelinear"
         android:gravity="center">
 
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/profilelogutbutton"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:background="@drawable/round_back_red"
             android:padding="10dp"
@@ -183,7 +187,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/profilebackbutton"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:background="@drawable/round_back_green"
             android:padding="10dp"
