@@ -233,6 +233,8 @@ public class QuizActivity extends AppCompatActivity {
         }
 
         else{
+            quizTimer.purge();
+            quizTimer.cancel();
             Intent intent = new Intent(QuizActivity.this,ResultsActivity.class);
             intent.putExtra("topic",getTopic);
             intent.putExtra("total",questionLists.size());
