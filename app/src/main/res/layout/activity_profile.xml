@@ -98,9 +98,63 @@
             android:textAlignment="center"
             android:textColorHint="@color/black"
             android:textStyle="bold"></EditText>
-
-
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profilescorelinear"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:padding="10dp"
+        >
+        <ImageView
+            android:id="@+id/level1badge"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/level1"
+            android:layout_margin="5dp"
+        />
+        <ImageView
+            android:id="@+id/level2badge"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/level2"
+            android:layout_margin="5dp"
+            />
+        <ImageView
+            android:id="@+id/level3badge"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/level3"
+            android:layout_margin="5dp"
+            />
+        <ImageView
+            android:id="@+id/level4badge"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/level4"
+            android:layout_margin="5dp"
+            />
+
+        <ImageView
+            android:id="@+id/score50"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/score50"
+            android:layout_margin="5dp"
+            />
+
+        <ImageView
+            android:id="@+id/score100"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/score100"
+            android:layout_margin="5dp"
+            />
+    </LinearLayout>
+
+
 
 
     <LinearLayout
