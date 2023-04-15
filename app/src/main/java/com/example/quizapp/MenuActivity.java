@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -53,6 +54,8 @@ public class MenuActivity extends AppCompatActivity {
 
         DatabaseReference levelsReference = FirebaseDatabase.getInstance("https://steng-dab96-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Levels/");
 
+        DatabaseReference badgesReference = FirebaseDatabase.getInstance("https://steng-dab96-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Badges/");
+
         email = findViewById(R.id.usersavtext);
         score = findViewById(R.id.score);
 
@@ -70,21 +73,36 @@ public class MenuActivity extends AppCompatActivity {
                     String completedlevel1 = snapshot.child(user.getUsername()).child("completedlvl1").getValue(String.class);
                     String completedlevel2 = snapshot.child(user.getUsername()).child("completedlvl2").getValue(String.class);
                     String completedlevel3 = snapshot.child(user.getUsername()).child("completedlvl3").getValue(String.class);
+                    String completedlevel4 = snapshot.child(user.getUsername()).child("completedlvl4").getValue(String.class);
 
                     if (Objects.equals(completedlevel1, "false")){
                         etterembutton.setClickable(false);
                         etterembutton.setBackgroundResource(R.drawable.round_back_grey);
                         etterembutton.setText("Először csináld meg az első szintet!");
                     }
+
+                    if (Objects.equals(completedlevel1, "true")){
+                        badgesReference.child(user.getUsername()).child("completedlevel1").setValue("true");
+                    }
+
                     if (Objects.equals(completedlevel2, "false")){
                         edzoterembutton.setClickable(false);
                         edzoterembutton.setBackgroundResource(R.drawable.round_back_grey);
                         edzoterembutton.setText("Először csináld meg a második szintet!");
                     }
+                    if (Objects.equals(completedlevel2, "true")){
+                        badgesReference.child(user.getUsername()).child("completedlevel2").setValue("true");
+                    }
                     if (Objects.equals(completedlevel3, "false")){
                         karacsonybutton.setClickable(false);
                         karacsonybutton.setBackgroundResource(R.drawable.round_back_grey);
                         karacsonybutton.setText("Először csináld meg a harmadik szintet!");
+                    }
+                    if (Objects.equals(completedlevel3, "true")){
+                        badgesReference.child(user.getUsername()).child("completedlevel3").setValue("true");
+                    }
+                    if (Objects.equals(completedlevel4, "true")){
+                        badgesReference.child(user.getUsername()).child("completedlevel4").setValue("true");
                     }
                 }
             }
@@ -103,7 +121,51 @@ public class MenuActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
                     coins = snapshot.child(user.getUsername()).child("score").getValue(String.class);
+
+                    int coinsint = Integer.parseInt(coins);
+                    if (coinsint >= 50){
+                        Query notified = badgesReference.orderByChild("username").equalTo(user.getUsername());
+                        notified.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (snapshot.exists()) {
+                                    String actual = snapshot.child(user.getUsername()).child("score50").getValue(String.class);
+                                    if (Objects.equals(actual, "false")) {
+                                        Toast.makeText(MenuActivity.this, "Kaptál egy medált!", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                        badgesReference.child(user.getUsername()).child("score50").setValue("true");
+                    }
+
+                    if (coinsint >= 100){
+                        Query notified = badgesReference.orderByChild("username").equalTo(user.getUsername());
+
+                        notified.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (snapshot.exists()) {
+                                    String actual = snapshot.child(user.getUsername()).child("score100").getValue(String.class);
+                                    if (Objects.equals(actual, "false")){
+                                        Toast.makeText(MenuActivity.this, "Kaptál egy medált!", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                            }
+                        });
+
+                        badgesReference.child(user.getUsername()).child("score100").setValue("true");
+                    }
                     score.setText(coins);
+
                 }
             }
 
@@ -112,6 +174,7 @@ public class MenuActivity extends AppCompatActivity {
 
             }
         });
+
         konyhabutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
